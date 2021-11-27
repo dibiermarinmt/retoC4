@@ -1,6 +1,6 @@
 com/retoC4/repository/crud/UserCrud.class
-com/retoC4/model/User.class
 com/retoC4/service/UserService.class
+com/retoC4/model/User.class
 com/retoC4/repository/UserRepository.class
 com/retoC4/RetoC4Application.class
 com/retoC4/controller/UserController.class
