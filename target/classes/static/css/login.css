@@ -7,8 +7,8 @@
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ 
   background: linear-gradient(to right, #24eee4, #369dd8, #5a36dd, #b44593);*/
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,17,1) 0%, rgba(9,14,124,1) 0%, rgba(0,255,160,1) 0%, rgba(12,136,237,1) 100%); 
+  background: rgb(83,185,111);
+  background: linear-gradient(90deg, rgba(83,185,111,1) 0%, rgba(22,148,194,0.7469188358937324) 100%, rgba(0,212,255,1) 100%);  
 
 }
 
