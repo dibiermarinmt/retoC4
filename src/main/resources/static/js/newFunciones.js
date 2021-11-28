@@ -26,3 +26,11 @@ function crearUser(){
         }
     });
 }
+
+
+function validarDatos() {
+    let esCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test($("#correo").val());
+    let clavesIguales = ($("#clave").val() == $("#clave2").val());
+    let 
+}
+
