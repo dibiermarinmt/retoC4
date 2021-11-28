@@ -28,5 +28,7 @@ function datosValidos() {
 function crearUser() {
     if(datosValidos()) {
         registrarUser();
+    } else {
+        alert("Usuario no creado");
     }
 }
