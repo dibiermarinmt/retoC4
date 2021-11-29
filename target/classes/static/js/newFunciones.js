@@ -1,4 +1,4 @@
-let raiz = "http://129.151.117.196:8080/api/user";
+let raiz = "http://localhost:8080/api/user";
 let alerta = "";
 
 function registrarUser(){
@@ -8,7 +8,7 @@ function registrarUser(){
         password: $("#clave").val()
     };
     $.ajax({
-        //crossOrigen: true,
+        crossOrigen: true,
         type:'POST',
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
@@ -34,7 +34,7 @@ function nombreValido() {
 function existeCorreo(correo) {
     let existe = false;
     $.ajax({
-        //crossOrigin: true,
+        crossOrigin: true,
         url: raiz + "/" + correo,
         type: "GET",
         async: false,
