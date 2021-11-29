@@ -22,7 +22,7 @@ public class RetoC4Application {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-                                        .allowedOrigins("/**") // poner http://localhost:8080                                         .allowedMethods("*")
+                                        .allowedOrigins("http://localhost:8080") // poner http://localhost:8080 o /**                                        .allowedMethods("*")
                                         .allowedHeaders("*");
 			}
 		};
