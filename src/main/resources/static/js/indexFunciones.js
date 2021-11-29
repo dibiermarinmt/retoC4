@@ -5,6 +5,7 @@ function entrarUser(){
     let clave = $("#clave").val();
 
     $.ajax({
+        //crossOrigin: true,
         url: raiz + "/" + correo + "/" + clave,
         type: "GET",
         dataType: "JSON",
@@ -19,5 +20,3 @@ function entrarUser(){
         }
     });
 }
-
-

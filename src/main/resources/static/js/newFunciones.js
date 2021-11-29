@@ -8,6 +8,7 @@ function registrarUser(){
         password: $("#clave").val()
     };
     $.ajax({
+        //crossOrigen: true,
         type:'POST',
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
@@ -33,6 +34,7 @@ function nombreValido() {
 function existeCorreo(correo) {
     let existe = false;
     $.ajax({
+        //crossOrigin: true,
         url: raiz + "/" + correo,
         type: "GET",
         async: false,
@@ -60,7 +62,7 @@ function correoValido() {
 
 function claveValida() {
     if($("#clave").val() == "") {
-        alerta = "Contraseña vacía. Escriba una contraseña";
+        alerta = "Contraseña vacía. Escriba una contraseña.";
         return false;
     } else if($("#clave2").val() == "") {
         alerta = "Reescriba la contraseña en el segundo campo.";
