@@ -1,4 +1,4 @@
-let raiz = "http://localhost:8080/api/user";
+let raiz = "http://129.151.117.196:8080/api/user";
 
 function entrarUser(){
     let correo = $("#correo").val();
