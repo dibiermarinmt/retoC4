@@ -8,7 +8,7 @@ function registrarUser(){
         password: $("#clave").val()
     };
     $.ajax({
-        crossOrigen: true,
+        //crossOrigen: true,
         type:'POST',
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
@@ -34,7 +34,7 @@ function nombreValido() {
 function existeCorreo(correo) {
     let existe = false;
     $.ajax({
-        crossOrigin: true,
+        //crossOrigin: true,
         url: raiz + "/" + correo,
         type: "GET",
         async: false,
