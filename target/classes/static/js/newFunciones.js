@@ -1,28 +1,38 @@
-let raiz = "http://129.151.117.196:8080/api/user";
+let raiz = "http://localhost:8080/api/user";
 let alerta = "";
 
 function registrarUser(){
     let user = {
-        name: $("#nombre").val(),
-        email: $("#correo").val(),
-        password: $("#clave").val()
+        identification: $("#identification").val(),
+        name: $("#name").val(),
+        address: $("#address").val(),
+        cellPhone: $("#cellPhone").val(),
+        email: $("#email").val(),
+        password: $("#password").val(),
+        zone: $("#zone").val(),
+        type: $("#type").val()
     };
     $.ajax({
         //crossOrigen: true,
-        type:'POST',
+        type:"POST",
         contentType:"application/json; charset=utf-8",
-        dataType: 'JSON',
+        dataType: "text", //mandaba parse error con JSON
         data: JSON.stringify(user),
         url: raiz + "/new",
 
         success: function(respose) {
-            alert("Se registró usuario correctamente");
+            alert("Se registró usuario correctamente.");
+        },
+
+        error: function(xhr, status){
+            console.log(status);
+            alert("Quizás no se registró.");
         }
     });
 }
 
 function nombreValido() {
-    if($("#nombre").val() != "") {
+    if($("#name").val() != "") {
         return true;
     } else {
         alerta ="Nombre no valido.";
@@ -30,12 +40,11 @@ function nombreValido() {
     }
 }
 
-
 function existeCorreo(correo) {
     let existe = false;
     $.ajax({
-        //crossOrigin: true,
-        url: raiz + "/" + correo,
+        crossOrigin: true,
+        url: raiz + "/emailexist/" + correo,
         type: "GET",
         async: false,
         dataType: "JSON",
@@ -47,12 +56,12 @@ function existeCorreo(correo) {
 }
 
 function correoValido() {
-    let esCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test($("#correo").val());
+    let esCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test($("#email").val());
     
     if(!esCorreo) {
         alerta = "No es un correo electrónico valido."
         return false;
-    } else if(existeCorreo($("#correo").val())) {
+    } else if(existeCorreo($("#email").val())) {
         alerta = "Este correo ya está registrado.";
         return false;
     } else {
@@ -61,12 +70,12 @@ function correoValido() {
 }
 
 function claveValida() {
-    if($("#clave").val() == "") {
+    if($("#password").val() == "") {
         alerta = "Contraseña vacía. Escriba una contraseña.";
         return false;
-    } else if($("#clave2").val() == "") {
+    } else if($("#password2").val() == "") {
         alerta = "Reescriba la contraseña en el segundo campo.";
-    } else if($("#clave").val() != $("#clave2").val()) {
+    } else if($("#password").val() != $("#password2").val()) {
         alerta = "Contraseñas diferentes.";
         return false;
     } else {
@@ -90,5 +99,4 @@ function crearUser() {
         alert(alerta);
         alerta = "";
     }
-    //console.log(existeCorreo($("#correo").val()));
 }
