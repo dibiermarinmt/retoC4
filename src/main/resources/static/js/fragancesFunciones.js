@@ -1,4 +1,4 @@
-let raiz = "http://129.151.117.196:8080/api/fragance";
+let raiz = "http://localhost:8080/api/fragance";
 let alerta = "";
 
 function pintarFragances(fragances) {
