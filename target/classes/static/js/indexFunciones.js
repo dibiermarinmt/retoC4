@@ -15,6 +15,7 @@ function habilitarUser(){
             console.log(json);
             if(json.id != null) {
                 alert("Bienvenido " + json.name +" ! ! !");
+                pintarOpciones();
             } else {
                 alert("El usuario no está en la base. Revisa tus credenciales o crea un usuario nuevo");
             }
@@ -57,7 +58,6 @@ function camposValidos(){
 function entrarUser() {
     if(camposValidos()) {
         habilitarUser();
-        pintarOpciones();
     } else {
         alert(alerta);
         alerta = "";
