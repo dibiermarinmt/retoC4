@@ -134,9 +134,11 @@ function pintarEditar(user){
             <input type="text" id="password" class="form-control" placeholder="Contraseña" value="${user.password}" />
             <label for="password">Contraseña</label>
         </div>
-        <div>
-        <button class="btn btn-primary btn-lg btn-block fa-lg gradient-custom-2 mb-3" type="button" onclick="guardarEditar(${user.id})">Guardar</button> &nbsp; &nbsp;
-        <button class="btn btn-primary btn-lg btn-block fa-lg gradient-custom-2 mb-3" type="button" onclick="cancelarEditar()">Cancelar</button>
+        <div>`
+    let id = JSON.stringify(user.id);
+    let email = JSON.stringify(user.email);
+    formulario += "<button class='btn btn-primary btn-lg btn-block fa-lg gradient-custom-2 mb-3' type='button' onclick='guardarEditar("+id+", "+email+")'>Guardar</button> &nbsp; &nbsp;";
+    formulario += `<button class="btn btn-primary btn-lg btn-block fa-lg gradient-custom-2 mb-3" type="button" onclick="cancelarEditar()">Cancelar</button>
         </div>
         </form>
     `;
@@ -194,8 +196,8 @@ function actualizarUser(id) {
     });
 }
 
-function guardarEditar(id) {
-    if(datosValidos()) {
+function guardarEditar(id, email) {
+    if(datosValidos(true, email)) {
         actualizarUser(id);
     } else {
         alert(alerta);
@@ -281,20 +283,35 @@ function existeCorreo(correo) {
         dataType: "JSON",
         success: function(respuesta) {
             existe = respuesta;
-            alerta = "Este correo ya está registrado."
         }
     });
     return existe;
 }
 
-function correoValido() {
+function correoValido(editar, email) {
     let esCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test($("#email").val());
     
-    if(!esCorreo) {
-        alerta = "No es un correo electrónico valido."
+    if($("#email").val() == "") {
+        alerta = "Campo de correo vacío";
         return false;
-    } else {
+    } else if(!esCorreo) {
+        alerta = "No es un correo electrónico valido.";
+        return false;
+    } else if(!editar){
+        if(existeCorreo($("#email").val())) {
+            alerta = "Este correo electrónico ya está registrado.";
+            return false;
+        }
         return true;
+    } else {
+       if(email != $("#email").val()) {
+        if(existeCorreo($("#email").val())) {
+            alerta = "Este correo electrónico ya está registrado.";
+            return false;
+        }
+        return true;      
+       }
+       return true;
     }
 }
 
@@ -328,16 +345,13 @@ function claveValida() {
 }
 
 
-function datosValidos(editar) {
+function datosValidos(editar, email) {
     let validos = true;
     validos &&= identificationValida();
     validos &&= nombreValido();
     validos &&= direccionValida();
     validos &&= celularValido();
-    if(!editar) {
-        validos &&= existeCorreo($("#email").val());
-    }
-    validos &&= correoValido();
+    validos &&= correoValido(editar, email);
     validos &&= zonaValida();
     validos &&= tipoValido();
     validos &&= claveValida();
@@ -345,7 +359,7 @@ function datosValidos(editar) {
 }
 
 function guardarCrear() {
-    if(datosValidos()) {
+    if(datosValidos(false, "")) {
         registrarUser();
     } else {
         alert(alerta);
