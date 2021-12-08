@@ -31,11 +31,40 @@ function registrarUser(){
     });
 }
 
+//--- copy init
+
+function identificationValida() {
+    if($("#identification").val() != "") {
+        return true;
+    } else {
+        alerta = "Campo de identificación vacío."
+        return false;
+    }
+}
+
 function nombreValido() {
     if($("#name").val() != "") {
         return true;
     } else {
-        alerta ="Nombre no valido.";
+        alerta ="Campo de nombre vacío.";
+        return false;
+    }
+}
+
+function direccionValida() {
+    if($("#address").val() != "") {
+        return true;
+    } else {
+        alerta = "Campo de dirección vacío."
+        return false;
+    }
+}
+
+function celularValido() {
+    if($("#cellPhone").val() != "") {
+        return true;
+    } else {
+        alerta = "Campo de número de celular vacío."
         return false;
     }
 }
@@ -43,7 +72,7 @@ function nombreValido() {
 function existeCorreo(correo) {
     let existe = false;
     $.ajax({
-        crossOrigin: true,
+        //crossOrigin: true,
         url: raiz + "/emailexist/" + correo,
         type: "GET",
         async: false,
@@ -58,11 +87,32 @@ function existeCorreo(correo) {
 function correoValido() {
     let esCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test($("#email").val());
     
-    if(!esCorreo) {
+    if($("#email").val() == ""){
+        alerta = "Campo de correo vacío";
+        return false;
+    } else if(!esCorreo) {
         alerta = "No es un correo electrónico valido."
         return false;
     } else if(existeCorreo($("#email").val())) {
         alerta = "Este correo ya está registrado.";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function zonaValida() {
+    if($("#zone").val() == "") {
+        alerta = "Campo de zona vacío.";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function tipoValido() {
+    if($("#type").val() == "") {
+        alerta = "Campo de tipo vacío.";
         return false;
     } else {
         return true;
@@ -86,9 +136,14 @@ function claveValida() {
 
 function datosValidos() {
     let validos = true;
-    validos = validos && nombreValido();
-    validos = validos && correoValido();
-    validos = validos && claveValida();
+    validos &&= identificationValida();
+    validos &&= nombreValido();
+    validos &&= direccionValida();
+    validos &&= celularValido();
+    validos &&= correoValido();
+    validos &&= zonaValida();
+    validos &&= tipoValido();
+    validos &&= claveValida();
     return validos;
 }
 
