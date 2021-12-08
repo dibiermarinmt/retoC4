@@ -281,6 +281,7 @@ function existeCorreo(correo) {
         dataType: "JSON",
         success: function(respuesta) {
             existe = respuesta;
+            alerta = "Este correo ya está registrado."
         }
     });
     return existe;
@@ -291,9 +292,6 @@ function correoValido() {
     
     if(!esCorreo) {
         alerta = "No es un correo electrónico valido."
-        return false;
-    } else if(existeCorreo($("#email").val())) {
-        alerta = "Este correo ya está registrado.";
         return false;
     } else {
         return true;
@@ -330,12 +328,15 @@ function claveValida() {
 }
 
 
-function datosValidos() {
+function datosValidos(editar) {
     let validos = true;
     validos &&= identificationValida();
     validos &&= nombreValido();
     validos &&= direccionValida();
     validos &&= celularValido();
+    if(!editar) {
+        validos &&= existeCorreo($("#email").val());
+    }
     validos &&= correoValido();
     validos &&= zonaValida();
     validos &&= tipoValido();
