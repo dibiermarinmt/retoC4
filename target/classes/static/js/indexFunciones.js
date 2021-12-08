@@ -57,8 +57,18 @@ function camposValidos(){
 function entrarUser() {
     if(camposValidos()) {
         habilitarUser();
+        pintarOpciones();
     } else {
         alert(alerta);
         alerta = "";
     }
+}
+
+function pintarOpciones(){
+    let opciones = `
+        ¿Qué deceas hacer?<br>
+        Administra usuarios <a class="text-muted" href="users.html">Aquí</a>.<br>
+        Administra productos <a class="text-muted" href="fragances.html">Aquí</a>.<br>
+    `;
+    $("#opciones").html(opciones);
 }
